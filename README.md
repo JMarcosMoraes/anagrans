@@ -78,43 +78,48 @@ Quando queremos desacoplar nosso código de uma biblioteca externa que pode ser 
 
 1. Interface comum da aplicação
 
-        public interface EmailService {
-             void sendEmail(String to, String subject, String body);
-        }
+    public interface EmailService {
+         void sendEmail(String to, String subject, String body);
+    }
 
 2. Biblioteca externa (simulada)
 
->     public class ExternalMailer {
->                	        public void deliver(String recipient, String title, String content)  {
->                	            // lógica de envio real
->                	        }
->                }
+public class ExternalMailer {
+    public void deliver(String recipient, String title, String content)  {
+        // lógica de envio real
+    }
+}
 
 3. Adaptador que conecta a biblioteca à interface
 
-   > public class ExternalMailerAdapter implements EmailService { private
-   > final ExternalMailer mailer;
-   >
-   > public ExternalMailerAdapter(ExternalMailer mailer) {
-   >     this.mailer = mailer; }
-   >
-   >     @Override
-   >     public void sendEmail(String to, String subject, String body) {
-   >         mailer.deliver(to, subject, body);
-   >     } }
+public class ExternalMailerAdapter implements EmailService { 
+    private final ExternalMailer mailer;
+    
+    public ExternalMailerAdapter(ExternalMailer mailer) {
+        this.mailer = mailer; 
+    }
+
+    @Override
+    public void sendEmail(String to, String subject, String body) {
+        mailer.deliver(to, subject, body);
+    } 
+}
 
 4. Uso na aplicação
 
-public class NotificationService {
-private final EmailService emailService;
-public NotificationService(EmailService emailService) {
-this.emailService = emailService;
-}
+    public class NotificationService {
+    
+    private final EmailService emailService;
+    
+    public NotificationService(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
     public void notifyUser(String email) {
         emailService.sendEmail(email, "Bem-vindo!", "Obrigado por se cadastrar.");
     }
-}
+    }
+
 
 ### 3. Describe your experience with Angular, including its core features and use cases.
 
