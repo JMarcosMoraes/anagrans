@@ -123,7 +123,22 @@ Se amanhã você quiser usar outra biblioteca, basta criar um novo adaptador que
 > and include a code snippet  demonstrating a key feature, such as
 > component communication, data binding, or  service integration.
 
+🚀 Experiência com Angular  
+Minha experiência com Angular envolve a construção de aplicações SPA (Single Page Applications) escaláveis, com foco em performance, modularidade e integração com APIs REST.
+Utilizei Angular em projetos como:
+- Sistemas de cadastro com formulários reativos e validação
+- Integração com back-end em Java (Spring Boot) usando serviços HTTP
 
+🧩 Recursos principais do Angular
+- Componentes: unidades reutilizáveis de UI
+- Data Binding: comunicação entre template e lógica (one-way e two-way)
+- Services & Dependency Injection: lógica compartilhada e desacoplada
+- Routing: navegação entre páginas sem recarregar
+- Formulários reativos e template-driven: controle total sobre validação e estado
+
+Vou deixar um link de um projeto que eu estou trabalhando.
+[kata-atende-front](https://github.com/JMarcosMoraes/kata-atende-front)
+[kata-atende-backEnd](https://github.com/JMarcosMoraes/kata-atende)
 
 ### 4. Discuss the techniques you use to prevent SQL injection attacks in web applications.
 
