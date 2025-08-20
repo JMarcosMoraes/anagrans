@@ -307,3 +307,17 @@ Given the tables above, write the SQL query that:
         2. Highlight any business rules or assumptions relevant to the solution.
         3. Describe any validations or security measures you would implement in the system.
         4. Suggest how you would test this functionality, including examples of edge cases.
+
+8. Consider the following description of a system functionality:
+   User Registration
+    A screen allows users to insert, delete, or update user information.
+    Each user has properties: name, email, address, and phone, where name and email
+   are mandatory fields.
+    Emails must be unique across all users.
+    Only admin users can delete other users.
+   Task:
+1. Describe the types of tests you would implement (e.g., unit, integration, or end-to-
+   end tests) and explain the scenarios you would test to ensure the functionality works
+   as expected.
+2. Provide examples of edge cases and how you would handle them.
+3. Include an example of a test case in code or pseudocode for one or more scenarios.
