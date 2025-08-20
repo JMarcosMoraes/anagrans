@@ -20,8 +20,8 @@ Gerador de anagrans
 # Segunda parte
 
 ### 1. Provide an example scenario where overriding the equals() method is necessary in Java.
-Explain the key considerations when implementing this method, such as ensuring it
-aligns with the hashCode() method. Include code examples if possible.
+    Explain the key considerations when implementing this method, such as ensuring it
+    aligns with the hashCode() method. Include code examples if possible.
 
 ### 2. Explain how you would use a design pattern to decouple your code from a third-party
    library that might be replaced in the future. Describe the advantages and limitations of
