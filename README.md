@@ -23,6 +23,22 @@
  Explain the key considerations when implementing this method, such as ensuring it
  aligns with the hashCode() method. Include code examples if possible.
 
+* Exemplo:
+* * classe Usuario.java
+* Pontos-chave ao implementar equals() e hashCode()
+  1 Consistência entre equals() e hashCode()
+  Se dois objetos são iguais segundo equals(), devem ter o mesmo hashCode(). Isso é essencial para coleções como HashSet, HashMap, etc.
+  2 Regras do contrato de equals():
+- Reflexivo: x.equals(x) deve ser true
+- Simétrico: x.equals(y) deve ser igual a y.equals(x)
+- Transitivo: se x.equals(y) e y.equals(z), então x.equals(z)
+- Consistente: múltiplas chamadas devem retornar o mesmo resultado
+- Null-safe: x.equals(null) deve retornar false
+- Evite erros comuns:
+- Usar == para comparar objetos em vez de .equals()
+- Esquecer de sobrescrever hashCode() ao sobrescrever equals()
+- Não verificar null ou tipo da classe no equals()
+
 ### 2. Explain how you would use a design pattern to decouple your code from a third-party
  library that might be replaced in the future. Describe the advantages and limitations of
  your chosen approach, and provide a small code snippet illustrating its application.
