@@ -57,12 +57,71 @@
 > Describe the advantages and limitations of    your chosen approach,
 > and provide a small code snippet illustrating its application.
 
+Quando queremos desacoplar nosso código de uma biblioteca externa que pode ser substituída no futuro, um dos padrões mais eficazes é o **Adapter Pattern** (Padrão Adaptador). Ele permite que você crie uma camada intermediária entre sua aplicação e a biblioteca, tornando a substituição futura muito mais simples e segura.
+
+**Por que usar o Adapter Pattern ?**
+
+✅ Vantagens:
+
+-   **Desacoplamento total**: seu código depende de uma interface, não da biblioteca.
+-   **Facilidade de substituição**: trocar a biblioteca exige apenas criar um novo adaptador.
+-   **Testabilidade**: você pode mockar a interface facilmente em testes.
+-   **Organização**: separa a lógica de negócio da lógica de integração.
+
+❌ Limitações:
+
+-   **Sobrecarga de código**: exige criação de interfaces e classes extras.
+-   **Manutenção duplicada**: se a biblioteca mudar, o adaptador precisa ser atualizado.
+-   **Pode ocultar funcionalidades específicas** da biblioteca se não forem expostas pela interface.
+
+📦 Exemplo prático: envio de e-mail
+
+1. Interface comum da aplicação
+
+        public interface EmailService {
+             void sendEmail(String to, String subject, String body);
+        }
+
+2. Biblioteca externa (simulada)
+
+>     public class ExternalMailer {
+>                	        public void deliver(String recipient, String title, String content)  {
+>                	            // lógica de envio real
+>                	        }
+>                }
+
+3. Adaptador que conecta a biblioteca à interface
+
+   > public class ExternalMailerAdapter implements EmailService { private
+   > final ExternalMailer mailer;
+   >
+   > public ExternalMailerAdapter(ExternalMailer mailer) {
+   >     this.mailer = mailer; }
+   >
+   >     @Override
+   >     public void sendEmail(String to, String subject, String body) {
+   >         mailer.deliver(to, subject, body);
+   >     } }
+
+4. Uso na aplicação
+
+public class NotificationService {
+private final EmailService emailService;
+public NotificationService(EmailService emailService) {
+this.emailService = emailService;
+}
+
+    public void notifyUser(String email) {
+        emailService.sendEmail(email, "Bem-vindo!", "Obrigado por se cadastrar.");
+    }
+}
 
 ### 3. Describe your experience with Angular, including its core features and use cases.
 
 > Provide an example of a practical application where you used Angular
 > and include a code snippet  demonstrating a key feature, such as
 > component communication, data binding, or  service integration.
+
 
 
 ### 4. Discuss the techniques you use to prevent SQL injection attacks in web applications.
@@ -78,3 +137,6 @@
 > queries, improve logic execution, and enhance file  transfer
 > efficiency. Provide examples of tools or techniques you would use
 > during the  analysis.
+
+
+
