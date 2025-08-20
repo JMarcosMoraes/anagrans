@@ -3,9 +3,9 @@ package com.kata.main;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-    @SpringBootApplication
-    public class AnagramGenerator {
-        public static void main(String[] args) {
-            SpringApplication.run(AnagramGenerator.class, args);
-        }
+@SpringBootApplication
+public class AnagramGenerator {
+    public static void main(String[] args) {
+        SpringApplication.run(AnagramGenerator.class, args);
     }
+}
