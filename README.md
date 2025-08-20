@@ -296,3 +296,38 @@ Evite operações unitárias. Use transações em lote:
     [FTP Download] → [Thread Pool] → [Processamento] → [Batch DB Insert] → [Log & Monitoramento]
 
 Cada etapa desacoplada, paralelizada e monitorada. Isso reduz o tempo total e melhora a resiliência.
+
+Modelo de banco de dados:
+
+![img2.png](img/img2.png)
+
+6. Given the tables above, write the SQL query that:
+   a. Returns the names of all Salesperson that don’t have any order with Samsonic.
+
+b. Updates the names of Salesperson that have 2 or more orders. It’s necessary to add an
+‘*’ in the end of the name.
+
+c. Deletes all Ssalesperson that placed orders to the city of Jackson.
+
+d. The total sales amount for each Salesperson. If the salesperson hasn’t sold anything,
+show zero.
+
+DS 1.1
+
+7. The customer has a system called XYZ and intends to start updates split into 3 phases.
+   The requirements for the first phase are as follows:
+1. Enable new data entries in the system, which will serve as input for the second
+   phase.
+2. Implement functionality to create, update, delete, and search plants.
+   o Plants should have the following attributes:
+    Code: Numeric only, mandatory, and unique.
+    Description: Alphanumeric, up to 10 characters, optional.
+   o Only admin users can delete plants.
+3. Ensure that the system prevents duplication of plant codes.
+   Task:
+   Based on the above information:
+1. Write a use case or user story for this scenario, ensuring that it clearly addresses the
+   requirements.
+2. Highlight any business rules or assumptions relevant to the solution.
+3. Describe any validations or security measures you would implement in the system.
+4. Suggest how you would test this functionality, including examples of edge cases.
