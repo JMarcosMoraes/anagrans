@@ -145,7 +145,61 @@ Vou deixar um link de um projeto que eu estou trabalhando.
 > Provide examples of code showing secure implementations, such as using
 > parameterized  queries or ORMs. Mention any additional measures you
 > take to secure the database  layer.
+>
+🛡️ Técnicas para Prevenir SQL Injection
 
+1. ✅ **Uso de Queries Parametrizadas (Prepared Statements)**
+
+Essa é a forma mais direta e eficaz de evitar SQL injection. Ao usar parâmetros em vez de concatenar strings, você garante que os dados do usuário não sejam interpretados como comandos SQL.
+
+💡 Exemplo em Java com JDBC
+
+    String sql = "SELECT * FROM usuarios WHERE email = ?";
+    PreparedStatement stmt = connection.prepareStatement(sql);
+    stmt.setString(1, emailInput);
+    ResultSet rs = stmt.executeQuery();
+
+🔒 _Aqui, mesmo que `emailInput` contenha algo malicioso como `"' OR '1'='1"`, ele será tratado como dado, não como parte da query._
+
+🧠 **Uso de ORMs (Object-Relational Mapping)**
+
+Frameworks como Hibernate, JPA, Sequelize (Node.js), ou Entity Framework (C#) abstraem o SQL e usam mecanismos internos para proteger contra injeções.
+
+💡 Exemplo com JPA (Java)
+
+    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
+    Usuario findByEmail(@Param("email") String email);
+
+✅ _O ORM cuida da parametrização e validação, reduzindo drasticamente o risco de SQL injection._
+
+3. 🔍 **Validação e Saneamento de Entrada**
+
+Embora parametrização seja suficiente na maioria dos casos, validar os dados do usuário ainda é importante:
+
+-   Verifique tipos esperados (números, datas, etc.)
+-   Use expressões regulares para validar formatos (e-mails, CPF, etc.)
+-   Rejeite entradas com caracteres suspeitos se não forem esperados
+
+4. 🔐 **Privilégios mínimos no banco de dados**
+
+Configure o usuário da aplicação com permissões restritas:
+
+-   Sem acesso a comandos perigosos como `DROP`, `ALTER`, etc.
+-   Sem acesso a tabelas desnecessárias
+-   Use roles específicas para leitura, escrita e administração
+
+5. 🧰 **Monitoramento e Logging**
+
+-   Registre tentativas suspeitas de acesso
+-   Use ferramentas de WAF (Web Application Firewall)
+-   Configure alertas para padrões incomuns de querie
+6. 🧪 **Testes de Segurança Automatizados**
+
+Utilize ferramentas como:
+
+-   **OWASP ZAP** ou **Burp Suite** para testes de penetração
+-   **SonarQube** para análise estática de código
+-   **Snyk** ou **Dependabot** para verificar vulnerabilidades em dependência
 
 ### 5. Describe the steps you would take to diagnose and improve the performance of a batch  process that interacts with a database and an FTP server.
 
