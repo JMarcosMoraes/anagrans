@@ -207,6 +207,92 @@ Utilize ferramentas como:
 > queries, improve logic execution, and enhance file  transfer
 > efficiency. Provide examples of tools or techniques you would use
 > during the  analysis.
+>
+🧪 Etapa 1: Diagnóstico — Identificar os Gargalo
+🔍 1. **Mapeamento do fluxo**
 
+-   Documente cada etapa: leitura de dados, processamento, escrita no banco, envio/recebimento via FTP.
+-   Use logs com timestamps para medir o tempo gasto em cada fase.
 
+🧰 2. **Ferramentas de análise**
 
+-   **JProfiler / VisualVM**: para identificar consumo de CPU, memória e threads.
+-   **Database EXPLAIN plans**: para analisar queries lentas.
+-   **Wireshark / FTP client logs**: para medir latência e throughput de transferências FTP.
+
+🗃️ Etapa 2: Otimização de Banco de Dados
+
+✅ 1. **Use queries parametrizadas**
+
+Evita overhead de parsing e melhora segurança.
+
+    PreparedStatement stmt = conn.prepareStatement("SELECT * FROM      pedidos WHERE status = ?");
+    stmt.setString(1, "pendente");
+
+🧠 2. **Indexação inteligente**
+
+-   Crie índices nas colunas usadas em `WHERE`, `JOIN`, `ORDER BY`.
+-   Use **EXPLAIN** para verificar se os índices estão sendo utilizados.
+
+🧹 3. **Evite SELECT *** e subqueries desnecessárias**
+
+-   Busque apenas os campos necessários.
+-   Prefira joins otimizados com filtros bem definidos.
+
+🧮 4. **Batch inserts/updates**
+
+Evite operações unitárias. Use transações em lote:
+
+    conn.setAutoCommit(false);
+    for (Pedido p : pedidos) {
+    stmt.setInt(1, p.getId());
+    stmt.setString(2, p.getStatus());
+    stmt.addBatch();
+    }
+    stmt.executeBatch();
+    conn.commit();
+
+⚙️ Etapa 3: Otimização da Lógica de Execução
+
+🧵 1. **Paralelismo e multithreading**
+
+-   Divida o processamento em threads ou use `ExecutorService`.
+-   Exemplo: processar arquivos FTP em paralelo enquanto grava no banco.
+
+🧼 2. **Evite reprocessamentos**
+
+-   Marque registros já processados.
+-   Use cache local ou Redis para evitar consultas repetidas.
+
+🧊 3. **Profiling de código**
+
+-   Identifique métodos com maior tempo de execução.
+-   Refatore loops aninhados e lógica condicional complexa.
+- 📤 Etapa 4: Eficiência no FTP
+
+🚀 1. **Use FTP passivo e compressão**
+
+-   Compressão (ZIP, GZIP) reduz tempo de transferência.
+-   FTP passivo evita problemas de firewall.
+
+📦 2. **Transferência em lote**
+
+-   Agrupe arquivos pequenos em um único pacote.
+-   Evite abrir e fechar conexões repetidamente.
+
+🧭 3. **Ferramentas úteis**
+
+-   **Apache Commons Net** ou **JSCH** para FTP/SFTP em Java.
+-   **lftp** ou **curl** para testes manuais e automação.
+
+🧠 Etapa 5: Monitoramento e Melhoria Contínua
+
+-   Configure **alertas** para tempos de execução fora do padrão.
+-   Use **Grafana + Prometheus** para visualizar métricas.
+-   Implemente **retry com backoff exponencial** para falhas de rede.
+
+🧵 Exemplo de Arquitetura Otimizada
+
+    [FTP Download] → [Thread Pool] → [Processamento] → [Batch DB Insert] → [Log & Monitoramento]
+
+Cada etapa desacoplada, paralelizada e monitorada. Isso reduz o tempo total e melhora a resiliência.
