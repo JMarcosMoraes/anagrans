@@ -17,4 +17,10 @@ public interface SalespersonRepository extends CrudRepository<Salesperson, Long>
         )
     """)
     List<String> findSalespersonsWithoutOrdersToSamsonic();
+
+    @Query("SELECT s FROM Salesperson s WHERE " +
+            "(SELECT COUNT(o) FROM Order o WHERE o.salesperson = s) >= 2")
+    List<Salesperson> findSalespeopleWithTwoOrMoreOrders();
+
+
 }
