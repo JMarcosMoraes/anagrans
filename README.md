@@ -291,7 +291,9 @@ Given the tables above, write the SQL query that:
 - b. Updates the names of Salesperson that have 2 or more orders. It’s necessary to add an  ‘*’ in the end of the name.
 
 Resultado após a chamada do serviço /update-name
+
 ![img.png](img/img4.png)
+
 - c. Deletes all Ssalesperson that placed orders to the city of Jackson.
 - d. The total sales amount for each Salesperson. If the salesperson hasn’t sold anything,  show zero.
 
