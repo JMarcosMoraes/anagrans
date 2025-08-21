@@ -11,7 +11,7 @@ public class Customer {
 
     private String name;
     private String city;
-    private String industryType;
+    private String industrytype;
 
 
     @OneToMany(mappedBy = "customer")
@@ -41,12 +41,12 @@ public class Customer {
         this.city = city;
     }
 
-    public String getIndustryType() {
-        return industryType;
+    public String getIndustrytype() {
+        return industrytype;
     }
 
-    public void setIndustryType(String industryType) {
-        this.industryType = industryType;
+    public void setIndustrytype(String industrytype) {
+        this.industrytype = industrytype;
     }
 
     public List<Order> getOrders() {

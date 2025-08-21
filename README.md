@@ -296,6 +296,9 @@ Resultado após a chamada do serviço /update-name
 ![img.png](img/img4.png)
 
 - c. Deletes all Ssalesperson that placed orders to the city of Jackson.
+
+![img.png](img/img5.png)
+
 - d. The total sales amount for each Salesperson. If the salesperson hasn’t sold anything,  show zero.
 
 7. The customer has a system called XYZ and intends to start updates split into 3 phases.  
