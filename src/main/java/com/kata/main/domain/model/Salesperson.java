@@ -13,7 +13,7 @@ public class Salesperson {
     private int age;
     private double salary;
 
-    @OneToMany(mappedBy = "salesperson")
+    @OneToMany(mappedBy = "salesperson", cascade = CascadeType.REMOVE)
     private List<Order> orders;
 
     public Long getId() {

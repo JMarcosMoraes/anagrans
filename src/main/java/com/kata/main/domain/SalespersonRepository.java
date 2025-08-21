@@ -22,5 +22,10 @@ public interface SalespersonRepository extends CrudRepository<Salesperson, Long>
             "(SELECT COUNT(o) FROM Order o WHERE o.salesperson = s) >= 2")
     List<Salesperson> findSalespeopleWithTwoOrMoreOrders();
 
+    @Query("SELECT DISTINCT o.salesperson FROM Order o " +
+            "WHERE o.customer.city = 'Jackson'")
+    List<Salesperson> findSalespeopleWhoOrderedToJackson();
+
+
 
 }

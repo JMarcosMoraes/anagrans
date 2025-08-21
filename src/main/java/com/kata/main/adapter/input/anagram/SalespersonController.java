@@ -24,4 +24,9 @@ public class SalespersonController {
         return ResponseEntity.ok("Nomes atualizados com sucesso!");
     }
 
+    @DeleteMapping("/delete-jackson-orders")
+    public ResponseEntity<String> deleteSalespeopleWhoOrderedToJackson() {
+        salespersonService.deleteSalespeopleWhoOrderedToJackson();
+        return ResponseEntity.ok("Vendedores que fizeram pedidos para Jackson foram excluídos.");
+    }
 }

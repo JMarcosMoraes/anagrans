@@ -27,4 +27,8 @@ public class SalespersonService {
         }
     }
 
+    public void deleteSalespeopleWhoOrderedToJackson() {
+        List<Salesperson> salespeople = salespersonRepository.findSalespeopleWhoOrderedToJackson();
+        salespersonRepository.deleteAll(salespeople);
+    }
 }

@@ -328,3 +328,70 @@ Resultado após a chamada do serviço /update-name
    as expected.
 2. Provide examples of edge cases and how you would handle them.
 3. Include an example of a test case in code or pseudocode for one or more scenarios.
+
+
+
+🧾 1. História do Usuário / Caso de Uso
+História do Usuário (Visão do Administrador):
+Como administrador do sistema XYZ, quero poder criar, atualizar, excluir e pesquisar registros de plantas, garantindo que os códigos sejam únicos e válidos, para que os dados estejam prontos para serem utilizados na próxima fase do projeto.
+
+Caso de Uso: Gerenciar Plantas
+| Elemento | Descrição |
+| Ator | Usuário administrador |
+| Pré-condições | Usuário autenticado com perfil de administrador |
+| Fluxo Principal | 1. Acessa módulo de plantas<br>2. Cria planta com código único<br>3. Atualiza descrição<br>4. Pesquisa por código ou descrição<br>5. Exclui planta se necessário |
+| Fluxo Alternativo | - Código duplicado → operação rejeitada<br>- Usuário não administrador → exclusão bloqueada |
+| Pós-condições | Dados da planta criados, atualizados ou excluídos conforme regras de negócio |
+
+
+
+📜 2. Regras de Negócio e Premissas
+- O código da planta deve ser:
+- Numérico
+- Obrigatório
+- Único no sistema
+- A descrição da planta:
+- Opcional
+- Alfanumérica
+- Máximo de 10 caracteres
+- Somente usuários com perfil de administrador podem excluir plantas.
+- Os dados cadastrados serão utilizados na fase 2, então a integridade e unicidade são essenciais.
+
+🔐 3. Validações e Medidas de Segurança
+✅ Validações
+- Código:
+- Obrigatório
+- Apenas números (^[0-9]+$)
+- Verificação de unicidade no banco
+- Descrição:
+- Opcional
+- Alfanumérica (^[a-zA-Z0-9]+$)
+- Máximo de 10 caracteres
+  🔒 Segurança
+- Controle de acesso baseado em papéis (RBAC):
+- Apenas administradores podem excluir
+- Usuários comuns podem criar, atualizar e pesquisar
+- Autenticação segura:
+- Uso de tokens JWT ou OAuth2
+- Auditoria:
+- Registro de ações (quem fez, quando e o quê)
+- Sanitização de entrada:
+- Prevenção contra injeção de código e dados maliciosos
+
+🧪 4. Estratégia de Testes e Casos de Borda
+🔍 Testes Funcionais
+- ✅ Criar planta com código válido e descrição válida
+- ❌ Criar planta com código duplicado → erro esperado
+- ❌ Criar planta com código não numérico → erro de validação
+- ✅ Atualizar descrição com valor válido
+- ❌ Atualizar descrição com mais de 10 caracteres → erro de validação
+- ✅ Pesquisar por código e descrição
+  🔐 Testes de Segurança
+- ❌ Tentar excluir como usuário comum → acesso negado
+- ✅ Excluir como administrador → sucesso
+  🧨 Casos de Borda
+- Criar planta com código 0001 → verificar tratamento de zeros à esquerda
+- Criar planta com descrição exatamente com 10 caracteres → testar limite
+- Criar planta sem descrição → validar campo opcional
+- Tentar excluir planta inexistente → verificar resposta amigável
+- Criar duas plantas simultaneamente com mesmo código → testar concorrência
