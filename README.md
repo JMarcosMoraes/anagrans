@@ -286,6 +286,7 @@ Cada etapa desacoplada, paralelizada e monitorada. Isso reduz o tempo total e me
 Given the tables above, write the SQL query that:
 
 - a. Returns the names of all Salesperson that don’t have any order with Samsonic.
+
 ![img.png](img/img3.png)
 
 - b. Updates the names of Salesperson that have 2 or more orders. It’s necessary to add an  ‘*’ in the end of the name.
